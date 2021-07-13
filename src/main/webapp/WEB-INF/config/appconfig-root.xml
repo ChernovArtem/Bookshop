@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Load other configuration -->
+    <import resource="appconfig-mvc.xml"/>
+    <import resource="appconfig-data.xml"/>
+    <import resource="appconfig-security.xml"/>
+    <!-- End Load other configuration -->
+
+    <!-- Scans the classpath for annotated components -->
+    <context:component-scan base-package = "ru.inno.shop" />
+
+    <!-- Property file -->
+    <context:property-placeholder location="classpath:util.properties" />
+</beans>

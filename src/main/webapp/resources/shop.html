@@ -1,0 +1,223 @@
+﻿<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Книги | Bookshop</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Favicons -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/icon.png">
+
+	<!-- Google font (font-family: 'Roboto', sans-serif; Poppins ; Satisfy) -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,600,600i,700,700i,800" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/css/plugins.css">
+	<link rel="stylesheet" href="resources/css/style.css">
+
+	<!-- Cusom css -->
+	<link rel="stylesheet" href="resources/css/custom.css">
+
+	<!-- Ajax jQuery js -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!-- Modernizer js -->
+	<script src="resources/js/vendor/modernizr-3.5.0.min.js"></script>
+</head>
+<body>
+	<!--[if lte IE 9]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
+
+	<input type="hidden" name="_csrf"/>
+
+	<!-- Main wrapper -->
+	<div class="wrapper" id="wrapper">
+		<!-- Header -->
+		<header id="wn__header" class="oth-page header__area header__absolute sticky__header">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-4 col-sm-4 col-7 col-lg-2">
+						<div class="logo">
+							<a href="index">
+								<img src="resources/images/logo/logo.png" alt="">
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-8 d-none d-lg-block">
+						<nav class="mainmenu__nav">
+							<ul class="meninmenu d-flex justify-content-start">
+								<li><a href="index">Главная</a></li>
+								<li class="drop"><a href="shop">Книги</a>
+									<div class="megamenu dropdown">
+										<ul class="item item01 menu_genre"></ul>
+									</div>
+								</li>
+								<li><a href="faq">Часто задаваемые вопросы</a></li>
+								<li><a href="contact">Контакты</a></li>
+							</ul>
+						</nav>
+					</div>
+					<div class="col-md-8 col-sm-8 col-5 col-lg-2">
+						<ul class="header__sidebar__right d-flex justify-content-end align-items-center">
+							<li class="shop_search"><a class="search__active" href="#"></a></li>
+							<li class="wishlist"><a href="wishlist" class="wishlist_count"></a></li>
+							<li class="shopcart"><a href="cart" class="shopcart_count"></a></li>
+							<li class="setting__bar__icon"><a class="setting__active" href="#"></a>
+								<div class="searchbar__content setting__block"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- Start Mobile Menu -->
+				<div class="row d-none">
+					<div class="col-lg-12 d-none">
+						<nav class="mobilemenu__nav">
+							<ul class="meninmenu">
+								<li><a href="index">Главная</a></li>
+								<li><a href="shop">Книги</a>
+									<ul class="menu_genre_mobil"></ul>
+								</li>
+								<li><a href="faq">Часто задаваемые вопросы</a></li>
+								<li><a href="contact">Контакты</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<!-- End Mobile Menu -->
+	            <div class="mobile-menu d-block d-lg-none">
+	            </div>
+	            <!-- Mobile Menu -->	
+			</div>		
+		</header>
+		<!-- //Header -->
+		<!-- Start Search Popup -->
+		<div class="box-search-content search_active block-bg close__top"></div>
+		<!-- End Search Popup -->
+		<!-- Start Bradcaump area -->
+		<div class="ht__bradcaump__area_small bg-image--6">
+		</div>
+		<!-- End Bradcaump area -->
+        <!-- Start Shop Page -->
+        <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+        	<div class="container">
+        		<div class="row">
+        			<div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
+        				<div class="shop__sidebar">
+        					<aside class="wedget__categories poroduct--cat">
+        						<h3 class="wedget__title">Жанры книг</h3>
+        						<ul class="genres_filter"></ul>
+        					</aside>
+        				</div>
+        			</div>
+        			<div class="col-lg-9 col-12 order-1 order-lg-2">
+        				<div class="row">
+        					<div class="col-lg-12">
+								<div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
+									<div class="shop__list nav justify-content-center" role="tablist">
+			                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
+			                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
+			                        </div>
+			                        <p class="showing_result"></p>
+			                        <div class="orderby__wrapper">
+			                        	<span>Сортировка по</span>
+			                        	<select class="shot__byselect" id="sort">
+			                        		<option value="0">По умолчанию</option>
+			                        		<option value="1">По возрастанию цены</option>
+			                        		<option value="2">По убыванию цены</option>
+			                        		<option value="3">По алфавиту</option>
+			                        	</select>
+			                        </div>
+		                        </div>
+        					</div>
+        				</div>
+        				<div class="tab__container">
+	        				<div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
+	        					<div class="row shop-grid-book"></div>
+	        				</div>
+	        				<div class="shop-grid tab-pane fade" id="nav-list" role="tabpanel">
+	        					<div class="list__view__wrapper shop-list-book"></div>
+	        				</div>
+        				</div>
+        			</div>
+        		</div>
+
+				<ul class="wn__pagination" style="margin:20px 0"></ul>
+        	</div>
+        </div>
+        <!-- End Shop Page -->
+		<!-- Footer Area -->
+		<footer id="wn__footer" class="footer__area bg__cat--8 brown--color">
+			<div class="footer-static-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="footer__widget footer__menu">
+								<div class="ft__logo">
+									<a href="index">
+										<img src="resources/images/logo/3.png" alt="logo">
+									</a>
+									<p>Любить чтение — это обменивать часы скуки, неизбежные в жизни, на часы большого наслаждения</p>
+								</div>
+								<div class="footer__content">
+									<ul class="social__net social__net--2 d-flex justify-content-center">
+										<li><a href="#" onclick="return false;"><i class="bi bi-facebook"></i></a></li>
+										<li><a href="#" onclick="return false;"><i class="bi bi-google"></i></a></li>
+										<li><a href="#" onclick="return false;"><i class="bi bi-twitter"></i></a></li>
+										<li><a href="#" onclick="return false;"><i class="bi bi-linkedin"></i></a></li>
+										<li><a href="#" onclick="return false;"><i class="bi bi-youtube"></i></a></li>
+									</ul>
+									<ul class="mainmenu d-flex justify-content-center">
+										<li><a href="shop">Все книги</a></li>
+										<li class="wishlist_foot"><a href="wishlist">Избранное</a></li>
+										<li><a href="contact">Контакты</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="copyright__wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-12">
+							<div class="copyright">
+								<div class="copy__right__inner text-left">
+									<p>Copyright <i class="fa fa-copyright"></i> Boighor. All Rights Reserved</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-12">
+							<div class="payment text-right">
+								<img src="resources/images/icons/payment.png" alt="" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- //Footer Area -->
+
+		</div>
+		<!-- //Main wrapper -->
+
+		<!-- JS Files -->
+		<script src="resources/js/vendor/jquery-3.2.1.min.js"></script>
+		<script src="resources/js/popper.min.js"></script>
+		<script src="resources/js/bootstrap.min.js"></script>
+		<script src="resources/js/plugins.js"></script>
+		<script src="resources/js/active.js"></script>
+		<script src="resources/js/menu.js"></script>
+		<script src="resources/js/shop.js"></script>
+		<script src="resources/js/cart.js"></script>
+		<script src="resources/js/wishlist.js"></script>
+		
+	</body>
+</html>

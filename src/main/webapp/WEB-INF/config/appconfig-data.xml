@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/jdbc
+    http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <!-- Connecting to database -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!-- End Connecting to database -->
+
+    <!-- Initialization DB at every start -->
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:sql/drop_tables.sql" encoding="UTF-8"/>
+        <jdbc:script location="classpath:sql/create_tables.sql" encoding="UTF-8"/>
+
+        <!-- users, roles and customers -->
+        <jdbc:script location="classpath:sql/insert/insert_into_users_and_roles.sql" encoding="UTF-8"/>
+        <jdbc:script location="classpath:sql/insert/insert_into_customers.sql" encoding="UTF-8"/>
+
+        <!-- others -->
+        <jdbc:script location="classpath:sql/insert/insert_into_wishlist.sql" encoding="UTF-8"/>
+        <jdbc:script location="classpath:sql/insert/insert_into_books.sql" encoding="UTF-8"/>
+        <jdbc:script location="classpath:sql/insert/insert_into_authors.sql" encoding="UTF-8"/>
+        <jdbc:script location="classpath:sql/insert/insert_into_booksbyauthor.sql" encoding="UTF-8"/>
+        <jdbc:script location="classpath:sql/insert/insert_into_genres.sql" encoding="UTF-8"/>
+        <jdbc:script location="classpath:sql/insert/insert_into_stock.sql" encoding="UTF-8"/>
+        <jdbc:script location="classpath:sql/insert/insert_into_feedback.sql" encoding="UTF-8"/>
+    </jdbc:initialize-database>
+    <!-- End Initialization DB at every start -->
+
+    <!-- JPA and Hibernate configuration -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="ru.inno.shop.model"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <!-- End JPA and Hibernate configuration -->
+
+    <!-- Defines the base package where the DAO interface will be tried to be detected -->
+    <jpa:repositories base-package="ru.inno.shop.repository"/>
+
+    <!-- Enable annotations transactional (@Transactional) -->
+    <tx:annotation-driven/>
+</beans>

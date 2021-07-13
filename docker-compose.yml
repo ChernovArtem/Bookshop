@@ -1,0 +1,42 @@
+version: '3.1'
+#для запуска выполнить команду 'docker-compose up -d'
+services:
+  shopdb:
+    # вместо simpldb указаь название своей БД
+    container_name: shopdb
+    image: postgres
+    # указать свои порты
+    ports:
+      - 5433:5432
+    # указать свои данные БД (название, пользователь, пароль)
+    environment:
+      - POSTGRES_DB=onlineShop
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1111
+    # рядом с этим файло должен лежать файл со скриптом инициализации БД с расширение .SQL. Подставить его название вместо
+    # script.sql. Можно и из другой папки, но нужно будет указать путь.
+    # Пока один volume хватает для поднятия БД.
+    volumes:
+      - ./tables_create.sql:/docker-entrypoint-initdb.d/tables_create.sql
+
+# все, что ниже, пока не нужно, можно закомментировать
+  app:
+    container_name: app
+    image: tomcat:9-jdk8
+    volumes:
+      - ./target/Bookshop.war:/usr/local/tomcat/webapps/Bookshop.war
+    ports:
+      - 8081:8080
+    depends_on:
+      - shopdb
+
+  payments:
+    container_name: payments
+    build:
+      context: payment_service
+      dockerfile: Dockerfile
+    image: payments:latest
+    ports:
+      - 80:80
+    depends_on:
+      - shopdb
